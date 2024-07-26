@@ -80,11 +80,25 @@ const GetAllBuses=async(req,res)=>{
             return res.status(404).json({error:'No bus'});
         }
         res.json(buses);
-        console.log(buses);
+        
     } catch (error) {
         console.log('Error in get all buses controller',error.message);
         return res.json({error:"Internal server error"});
     }
 }
 
-export {AddBus,GetBus,GetAllBuses}
+const DeleteBus=async(req,res)=>{
+    const {id:busId}=req.params;
+    try {
+        const bus=await Bus.findByIdAndDelete(busId);
+        if(!bus){
+            return res.status(404).json({error:"Bus not found"});
+        }
+        res.json(bus);
+    } catch (error) {
+        console.log('Error in delete bus controller',error.message);
+        return res.json({error:"Internal server error"});
+    }
+}
+
+export {AddBus,GetBus,GetAllBuses,DeleteBus}

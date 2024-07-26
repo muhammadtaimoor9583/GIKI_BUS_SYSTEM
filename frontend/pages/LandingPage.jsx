@@ -1,10 +1,11 @@
 import React from 'react'
 import Header from '../components/Header'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 
 
 function LandingPage() {
+  const navigate=useNavigate();
   return (
     
     <div className=' w-full flex items-center flex-col'>
@@ -20,7 +21,7 @@ function LandingPage() {
       Book your bus seat hassle-free and enjoy a comfortable journey.
       </p>
       <div className='flex flex-row gap-4'>
-      <button className="btn btn-primary bg-blue-800 w-30 h-8">Search</button>
+      <button className="btn btn-primary bg-blue-800 w-30 h-8" onClick={()=>navigate('/tickets')}>Search</button>
       <button className="btn btn-primary bg-blue-800 w-30 h-8">Learn More</button>
       </div>
     </div>

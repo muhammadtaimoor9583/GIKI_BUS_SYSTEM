@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import { formatPostDate, getFormatedDate, getFormatedTime } from '../utils/GetDate.js';
+import Ticket from '../components/Ticket.jsx';
 
 
 function TicketsPage() {
+  const [searchValue,setSearchValue]=useState('');
+  const [noTickets,setnoTickets]=useState(true);
   const {data:buses,isError,isLoading}=useQuery({
     queryKey:['buses'],
     queryFn:async()=>{
@@ -24,6 +27,8 @@ function TicketsPage() {
     }
     
   })
+
+
   
   if(isLoading){
     return <LoadingSpinner/>
@@ -32,104 +37,49 @@ function TicketsPage() {
     return <div>{error.message}</div>
   }
   return (
-    <div className='bg-gray-50 h-screen'>
-    <div className='w-full flex items-center justify-center text-blue-700'>
+    <div className='bg-gray-50 min-h-screen w-full'>
+    <div className='w-full flex flex-col items-center justify-center text-blue-700 gap-4'>
     <h1 className='font-bold text-4xl mt-10'>Available Tickets</h1>
+    
+<form class="w-[50%]">   
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+        </div>
+        <input type="search" id="default-search" class="text-xl block w-full p-4 ps-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required 
+        onChange={(e)=>{setSearchValue(e.target.value)}}
+        />
+    </div>
+</form>
+
   </div>
         <div
 class="flex w-full flex-row items-center px-3 pt-3 md:pb-5"
 >
-  
+      
       {
         
          buses.map((bus)=>{
            const date=getFormatedDate(bus.busDate);
            const time=getFormatedTime(bus.busDate);
+           if(bus.from.toLowerCase().includes(searchValue.toLowerCase()) || bus.to.toLowerCase().includes(searchValue.toLowerCase())){
+            
           return(
-    <Link to={`/booking/${bus._id}`}>
-      <div class="container-sm w-[97%] h-[100%] md:p-5">
-      
-      <div
-        class="flex flex-row flex-wrap justify-between container-sm mt-[86px] "
-      >
-        <div class="pb-5 flex justify-center items-center">
-          <a href="#" target="_blank">
-            <div
-              class="w-96 h-60 bg-red-100 rounded-xl relative text-white shadow-2xl transition-transform transform hover:scale-110"
-            >
-              <img
-                class="relative object-cover w-full h-full rounded-xl"
-                src="/assets/images/kGkSg1v.png"
-              />
-
-              <div class="w-full px-8 absolute top-8">
-                <div class="flex justify-between">
-                  <div>
-                  <h1 class="text-2xl font-bold">{bus.busName.toUpperCase()}</h1>
-                  </div>
-                  <div class="">
-                    <p class="font-medium tracking-widest">
-                      {bus.from}
-                    </p>
-                    <p>to</p>
-                    <p class="font-medium tracking-widest">
-                      {bus.to}
-                    </p>
-                  </div>
-
-                </div>
-
-                <div class="pt-6">
-                  <div class="flex justify-between">
-                    <div class="">
-                      <p class="font-light text-xs">Ticket No</p>
-                      <p class="font-medium tracking-wider text-sm">
-                        {bus.busCapacity}
-                      </p>
-                    </div>
-                    <div class="">
-                      <p class="font-light text-xs">Date</p>
-                      <p class="font-medium tracking-wider text-sm">
-                        {date}
-                      </p>
-                    </div>
-
-                    <div class="">
-                      <p class="font-light text-xs">Time</p>
-                      <p class="font-medium tracking-wider text-sm">
-                        {time}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="pt-6 pr-6">
-                  <div class="flex justify-between">
-                    <div class="">
-                      <p class="font-light text-xs">Location</p>
-                      <p class="font-medium tracking-wider text-sm">
-                        {bus.location}
-                      </p>
-                    </div>
-                    <div class="">
-                      <p class="font-light text-xs">Bus No</p>
-                      <p class="font-medium tracking-wider text-sm">
-                        {bus.busNumber}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      
-    </div>
-    </Link>
+            <Link to={`/booking/${bus._id}`}>
+            <Ticket bus={bus} date={date} time={time}/>
+            </Link>
           )
-          
+        }
+        else{
+          return null;
+        }
         })
+        
       }
+      
   </div>
   </div>
     

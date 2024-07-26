@@ -27,8 +27,8 @@ const handleOutsideClick = (e) => {
 
 
 
-const date=getFormatedDate(ticket?.bus.busDate);
-const time=getFormatedTime(ticket?.bus.busDate);
+const date=getFormatedDate(ticket?.bus?.busDate);
+const time=getFormatedTime(ticket?.bus?.busDate);
 
   if(isLoading){
     return <LoadingSpinner/>
@@ -49,7 +49,7 @@ const time=getFormatedTime(ticket?.bus.busDate);
             alt=""
             class="rounded-full h-6 shadow-md inline-block mr-2"
           />
-            <span>{`${ticket?.bus.from} to ${ticket?.bus.to}`} </span>
+            <span>{`${ticket?.bus?.from} to ${ticket?.bus?.to}`} </span>
           </div>
 
             <div className="flex flex-row-reverse">

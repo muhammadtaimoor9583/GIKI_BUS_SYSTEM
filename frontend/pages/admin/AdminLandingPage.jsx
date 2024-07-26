@@ -13,18 +13,14 @@ function AdminLandingPage() {
           />
     </div>
     <div className='flex items-center flex-col justify-center gap-4'>
-    <Link to='/addBus'>
-      <button className='btn btn-primary bg-blue-800 w-28 text-xl'>Add Bus</button>
+    <Link to='/admin/bus'>
+    <button className='btn btn-primary bg-blue-800 w-28 text-xl'>Bus Section</button>
+     
       </Link>
-      <Link to='/addBus'>
-      <button className='btn btn-primary bg-blue-800 w-28 text-xl'>Add Student</button>
+      <Link to='/admin/student'>
+      <button className='btn btn-primary bg-blue-800 w-28 text-xl'>Student Section</button>
       </Link>
-      <Link to='/addBus'>
-      <button className='btn btn-primary bg-blue-800 w-28 text-xl'>Search a bus</button>
-      </Link>
-      <Link to='/addBus'>
-      <button className='btn btn-primary bg-blue-800 w-28 text-xl'>Remove a bus</button>
-      </Link>
+      
     </div>
     </>
   )

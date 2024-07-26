@@ -25,6 +25,7 @@ import AdminHeader from '../components/admin/AdminHeader'
 import AddBus from '../components/admin/AddBus'
 import TicketDetails from '../pages/TicketDetails'
 import VerificationPage from '../pages/VerificationPage'
+import BusPage from '../pages/admin/BusPage'
 
 
 
@@ -80,8 +81,12 @@ function App() {
         <Route exact path='/reset-password-sent' element={<ResetPasswordSent/>}/>
         <Route exact path='/search' element={<SearchPage/>}/>
         <Route exact path='/tickets' element={<TicketsPage/>}/>
+
+
+
         <Route exact path='/admin' element={<AdminLandingPage/>}/>
-        <Route exact path='/admin/addbus' element={<AddBus/>}/>
+        <Route exact path='/admin/bus' element={<BusPage/>}/>
+        <Route exact path='/admin/student' element={<AdminLandingPage/>}/>
 
       </Routes>
 
