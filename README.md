@@ -10,9 +10,9 @@ This repository contains our Database Management System (DBMS) Project developed
 
 ## Technologies Used
 - **UI/UX**: Figma, DhiWise<br>
-- **Front-End**: HTML, Tailwind CSS<br>
-- **Back-End**: Django<br>
-- **Database**: PostgreSQL<br>
+- **Front-End**: React.js, Tailwind CSS<br>
+- **Back-End**: Node.js,Express.js<br>
+- **Database**: MongoDB<br>
  
 ## Repository Structure:
 ```
